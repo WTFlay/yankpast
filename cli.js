@@ -9,12 +9,12 @@ if (argv.length < 3) {
   process.exit(1);
 }
 
-const data = require(path.resolve(__dirname, argv[0]));
-const template = fs.readFileSync(path.resolve(__dirname, argv[1]), 'utf8');
+const data = require(path.resolve(process.cwd(), argv[0]));
+const template = fs.readFileSync(path.resolve(process.cwd(), argv[1]), 'utf8');
 const naming = argv[2];
 
 data.map(item => {
   const filename = Mustache.render(naming, item);
   const content = Mustache.render(template, item);
-  fs.writeFileSync(path.resolve(__dirname, filename), content, 'utf8');
+  fs.writeFileSync(path.resolve(process.cwd(), filename), content, 'utf8');
 });
